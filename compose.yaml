@@ -1,0 +1,60 @@
+services:
+  orion:
+    image: ubuntu:24.04
+    container_name: orion
+    hostname: orion
+    working_dir: /root
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    command: >
+      bash -c "apt-get update &&
+      apt-get install -y gnupg pinentry-curses &&
+      sleep infinity"
+    volumes:
+      - type: bind
+        source: ./orion_work
+        target: /work
+    healthcheck:
+      test: ["CMD", "gpg", "--version"]
+      interval: 10s
+      retries: 30
+
+  vega:
+    image: ubuntu:24.04
+    container_name: vega
+    hostname: vega
+    working_dir: /root
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    command: >
+      bash -c "apt-get update &&
+      apt-get install -y gnupg pinentry-curses &&
+      sleep infinity"
+    volumes:
+      - type: bind
+        source: ./vega_work
+        target: /work
+    healthcheck:
+      test: ["CMD", "gpg", "--version"]
+      interval: 10s
+      retries: 30
+
+  lyra:
+    image: ubuntu:24.04
+    container_name: lyra
+    hostname: lyra
+    working_dir: /root
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    command: >
+      bash -c "apt-get update &&
+      apt-get install -y gnupg pinentry-curses &&
+      sleep infinity"
+    volumes:
+      - type: bind
+        source: ./lyra_work
+        target: /work
+    healthcheck:
+      test: ["CMD", "gpg", "--version"]
+      interval: 10s
+      retries: 30
